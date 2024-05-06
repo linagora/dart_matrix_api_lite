@@ -1,36 +1,33 @@
+import 'dart:developer';
+
 import 'package:matrix_api_lite/matrix_api_lite.dart';
 
 extension PrintLogs on LogEvent {
+
   void printOut() {
     var logsStr = title;
-    if (exception != null) {
-      logsStr += ' - ${exception.toString()}';
-    }
-    if (stackTrace != null) {
-      logsStr += '\n${stackTrace.toString()}';
-    }
     if (Logs().nativeColors) {
       switch (level) {
         case Level.wtf:
-          logsStr = '\x1B[31m!!!CRITICAL!!! $logsStr\x1B[0m';
+          log('\x1B[31m$logsStr', stackTrace: stackTrace, error: exception, level: 5, time: DateTime.now());
           break;
         case Level.error:
-          logsStr = '\x1B[31m$logsStr\x1B[0m';
+          logsStr = logsStr;
+          log('\x1B[31m $logsStr', stackTrace: stackTrace, error: exception, level: 4, time: DateTime.now());
           break;
         case Level.warning:
-          logsStr = '\x1B[33m$logsStr\x1B[0m';
+          log('\x1B[33m $logsStr', stackTrace: stackTrace, error: exception, level: 3, time: DateTime.now());
           break;
         case Level.info:
-          logsStr = '\x1B[32m$logsStr\x1B[0m';
+          log('\x1B[32m $logsStr', stackTrace: stackTrace, error: exception, level: 2, time: DateTime.now());
           break;
         case Level.debug:
-          logsStr = '\x1B[34m$logsStr\x1B[0m';
+          log('\x1B[34m $logsStr', stackTrace: stackTrace, error: exception, level: 1, time: DateTime.now());
           break;
         case Level.verbose:
+          log(' $logsStr', stackTrace: stackTrace, error: exception, level: 0, time: DateTime.now());
           break;
       }
     }
-    // ignore: avoid_print
-    print('[Matrix] $logsStr');
   }
 }
