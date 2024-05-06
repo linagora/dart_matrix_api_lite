@@ -21,6 +21,8 @@
 * SOFTWARE.
 */
 
+import 'package:matrix_api_lite/src/utils/debug_utils.dart';
+
 import 'print_logs_native.dart' if (dart.library.html) 'print_logs_web.dart';
 
 enum Level {
@@ -51,14 +53,16 @@ class Logs {
   Logs._internal();
 
   void addLogEvent(LogEvent logEvent) {
+    if (!DebugUtils().isDebugMode) {
+      return;
+    }
     outputEvents.add(logEvent);
     if (logEvent.level.index <= level.index) {
       logEvent.printOut();
     }
   }
 
-  void wtf(String title, [Object? exception, StackTrace? stackTrace]) =>
-      addLogEvent(
+  void wtf(String title, [Object? exception, StackTrace? stackTrace]) => addLogEvent(
         LogEvent(
           title,
           exception: exception,
@@ -67,8 +71,7 @@ class Logs {
         ),
       );
 
-  void e(String title, [Object? exception, StackTrace? stackTrace]) =>
-      addLogEvent(
+  void e(String title, [Object? exception, StackTrace? stackTrace]) => addLogEvent(
         LogEvent(
           title,
           exception: exception,
@@ -77,8 +80,7 @@ class Logs {
         ),
       );
 
-  void w(String title, [Object? exception, StackTrace? stackTrace]) =>
-      addLogEvent(
+  void w(String title, [Object? exception, StackTrace? stackTrace]) => addLogEvent(
         LogEvent(
           title,
           exception: exception,
@@ -87,8 +89,7 @@ class Logs {
         ),
       );
 
-  void i(String title, [Object? exception, StackTrace? stackTrace]) =>
-      addLogEvent(
+  void i(String title, [Object? exception, StackTrace? stackTrace]) => addLogEvent(
         LogEvent(
           title,
           exception: exception,
@@ -97,8 +98,7 @@ class Logs {
         ),
       );
 
-  void d(String title, [Object? exception, StackTrace? stackTrace]) =>
-      addLogEvent(
+  void d(String title, [Object? exception, StackTrace? stackTrace]) => addLogEvent(
         LogEvent(
           title,
           exception: exception,
@@ -107,8 +107,7 @@ class Logs {
         ),
       );
 
-  void v(String title, [Object? exception, StackTrace? stackTrace]) =>
-      addLogEvent(
+  void v(String title, [Object? exception, StackTrace? stackTrace]) => addLogEvent(
         LogEvent(
           title,
           exception: exception,
