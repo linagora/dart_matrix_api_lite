@@ -11,6 +11,7 @@ extension PrintLogs on LogEvent {
     if (stackTrace != null) {
       logsStr += '\n${stackTrace.toString()}';
     }
+    logsStr = ' ${DateTime.now()}: $logsStr';
     switch (level) {
       case Level.wtf:
         window.console.error('!!!CRITICAL!!! $logsStr');
