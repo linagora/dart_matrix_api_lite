@@ -28,13 +28,17 @@ class PresenceContent {
   int? lastActiveAgo;
   String? statusMsg;
   bool? currentlyActive;
+  String? avatarUrl;
+  String? displayname;
 
   PresenceContent.fromJson(Map<String, Object?> json)
-      : presence = PresenceType.values.firstWhere(
-            (p) => p.toString().split('.').last == json['presence']),
+      : presence =
+            PresenceType.values.firstWhere((p) => p.toString().split('.').last == json['presence']),
         lastActiveAgo = json.tryGet<int>('last_active_ago'),
         statusMsg = json.tryGet<String>('status_msg'),
-        currentlyActive = json.tryGet<bool>('currently_active');
+        currentlyActive = json.tryGet<bool>('currently_active'),
+        avatarUrl = json.tryGet<String>('avatar_url'),
+        displayname = json.tryGet<String>('displayname');
 
   Map<String, Object?> toJson() {
     final data = <String, Object?>{};
@@ -47,6 +51,12 @@ class PresenceContent {
     }
     if (currentlyActive != null) {
       data['currently_active'] = currentlyActive;
+    }
+    if (avatarUrl != null) {
+      data['avatar_url'] = avatarUrl;
+    }
+    if (displayname != null) {
+      data['displayname'] = displayname;
     }
     return data;
   }

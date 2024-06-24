@@ -1579,6 +1579,8 @@ class GetPresenceResponse {
     this.lastActiveAgo,
     required this.presence,
     this.statusMsg,
+    this.avatarUrl,
+    this.displayname,
   });
 
   GetPresenceResponse.fromJson(Map<String, Object?> json)
@@ -1587,7 +1589,10 @@ class GetPresenceResponse {
         lastActiveAgo =
             ((v) => v != null ? v as int : null)(json['last_active_ago']),
         presence = PresenceType.values.fromString(json['presence'] as String)!,
-        statusMsg = ((v) => v != null ? v as String : null)(json['status_msg']);
+        statusMsg = ((v) => v != null ? v as String : null)(json['status_msg']),
+        avatarUrl = ((v) => v != null ? v as String : null)(json['avatar_url']),
+        displayname =
+            ((v) => v != null ? v as String : null)(json['displayname']);
   Map<String, Object?> toJson() {
     final currentlyActive = this.currentlyActive;
     final lastActiveAgo = this.lastActiveAgo;
@@ -1597,6 +1602,8 @@ class GetPresenceResponse {
       if (lastActiveAgo != null) 'last_active_ago': lastActiveAgo,
       'presence': presence.name,
       if (statusMsg != null) 'status_msg': statusMsg,
+      if (avatarUrl != null) 'avatar_url': avatarUrl,
+      if (displayname != null) 'displayname': displayname,
     };
   }
 
@@ -1612,6 +1619,12 @@ class GetPresenceResponse {
 
   /// The state message for this user if one was set.
   String? statusMsg;
+
+  /// The avatarUrl of current user if have
+  String? avatarUrl;
+
+  /// The displayname of current user if have
+  String? displayname;
 }
 
 ///
