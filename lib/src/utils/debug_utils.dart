@@ -1,7 +1,7 @@
 class DebugUtils {
   static final DebugUtils _instance = DebugUtils._internal();
 
-  static bool enableLogs = false;
+  static bool _enableLogs = false;
 
   DebugUtils._internal();
 
@@ -9,12 +9,11 @@ class DebugUtils {
     return _instance;
   }
 
+  void enableLogs(bool enable) {
+    _enableLogs = enable;
+  }
+
   bool get isDebugMode {
-    if (enableLogs) {
-      return enableLogs;
-    }
-    bool inDebugMode = false;
-    assert(inDebugMode = true);
-    return inDebugMode;
+    return _enableLogs;
   }
 }
