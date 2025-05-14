@@ -24,6 +24,7 @@
 library matrix_api_lite;
 
 export 'src/generated/model.dart';
+export 'src/generated/fixed_model.dart';
 export 'src/matrix_api.dart';
 export 'src/model/algorithm_types.dart';
 export 'src/model/auth/authentication_data.dart';
